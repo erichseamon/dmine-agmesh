@@ -46,7 +46,8 @@ library("Evapotranspiration")
 library("plyr")
 library("data.table")
 library("sirad")
-#detach("package:hydroTSM")
+
+
 
 scen <- read.table("/tmp/agmesh-subset-web-scenario.txt")
 scen <- t(scen)
@@ -346,11 +347,11 @@ for (i in yearspan) {
   
   #--writes et grids to folder.  needs permissions fix
   
-  assign(paste("erichet", i, "brick", sep=""), erichet)
-  savedstackname <- paste("erichet", i, "brick_", scen[1], sep="")
-  savedstack <- assign(paste("erichet", i, "brick_", scen[1], sep=""), erichet)
-  fname <- paste("/agmesh-scenarios/", scen[1], "/ETgrids", "/ET", i, scen[1], sep="")
-  writeRaster(savedstack, filename=fname, bandorder='BIL', overwrite=TRUE)
+  #assign(paste("erichet", i, "brick", sep=""), erichet)
+  #savedstackname <- paste("erichet", i, "brick_", scen[1], sep="")
+  #savedstack <- assign(paste("erichet", i, "brick_", scen[1], sep=""), erichet)
+  #fname <- paste("/agmesh-scenarios/", scen[1], "/ETgrids", "/ET", i, scen[1], sep="")
+  #writeRaster(savedstack, filename=fname, bandorder='BIL', overwrite=TRUE)
   
   erichetspring <- erichet[[1:100]]
   erichetwinter <- erichet[[210:310]]
@@ -367,17 +368,17 @@ for (i in yearspan) {
   
   #--writes et grids to folder.  needs permissions fix
   
-  savedstacknamespring <- paste("erichet", i, "brick_", scen[1], sep="")
-  savedstackspring <- assign(paste("erichet", i, "brick_", scen[1], sep=""), erichetspring)
-  fnamespring <- paste("/agmesh-scenarios/", scen[1], "/ETgrids", "/ETspring", i, scen[1], sep="")
-  writeRaster(savedstackspring, filename=fnamespring, bandorder='BIL', overwrite=TRUE)
+  #savedstacknamespring <- paste("erichet", i, "brick_", scen[1], sep="")
+  #savedstackspring <- assign(paste("erichet", i, "brick_", scen[1], sep=""), erichetspring)
+  #fnamespring <- paste("/agmesh-scenarios/", scen[1], "/ETgrids", "/ETspring", i, scen[1], sep="")
+  #writeRaster(savedstackspring, filename=fnamespring, bandorder='BIL', overwrite=TRUE)
   
   #--writes et grids to folder.  needs permissions fix
   
-  savedstacknamewinter <- paste("erichet", i, "brick_", scen[1], sep="")
-  savedstackwinter <- assign(paste("erichet", i, "brick_", scen[1], sep=""), erichetwinter)
-  fnamewinter <- paste("/agmesh-scenarios/", scen[1], "/ETgrids", "/ETwinter", i, scen[1], sep="")
-  writeRaster(savedstackwinter, filename=fnamewinter, bandorder='BIL', overwrite=TRUE)
+  #savedstacknamewinter <- paste("erichet", i, "brick_", scen[1], sep="")
+  #savedstackwinter <- assign(paste("erichet", i, "brick_", scen[1], sep=""), erichetwinter)
+  #fnamewinter <- paste("/agmesh-scenarios/", scen[1], "/ETgrids", "/ETwinter", i, scen[1], sep="")
+  #writeRaster(savedstackwinter, filename=fnamewinter, bandorder='BIL', overwrite=TRUE)
   
   #print("past the raster stuff")
   
@@ -459,10 +460,10 @@ for (i in yearspan){
   fclimatematrix2 <- get(paste("climatematrix", i, sep=""))
   fclimatematrix1 <- rbind2(fclimatematrix1, fclimatematrix2)
 }
-#print("here")
+
 setwd(paste("/agmesh-scenarios/", scen, "/ETtimelapse", sep="")) 
-system("/usr/local/bin/ffmpeg -i '%*.jpg' -r 30 -q:v 2 timelapse.mp4")
-#print("and here")
+system("ffmpeg -i '%*.jpg' -r 30 -q:v 2 timelapse.mp4")
+
 #------------------------------------------------------------------------#
 # TITLE:        agmesh_plotting_ET.R
 #
@@ -502,7 +503,7 @@ now <- Sys.time()
 
 for (i in yearspan) {
   
-  jpeg(paste("/agmesh-scenarios/", scen, "/tmmximages", "/springplot", "tmmx", i, ".jpg", sep=""))
+  jpeg(paste("/agmesh-scenarios/", scen, "/springplot", "tmmx", i, ".jpg", sep=""))
   
   lyt = c(1, 2)
   
@@ -580,7 +581,7 @@ for (i in yearspan) {
   
   
   
-  jpeg(paste("/agmesh-scenarios/", scen, "/tmmnimages", "/springplot", "tmmn", i, ".jpg", sep=""))
+  jpeg(paste("/agmesh-scenarios/", scen, "/springplot", "tmmn", i, ".jpg", sep=""))
   
   lyt = c(1, 2)
   
@@ -626,7 +627,7 @@ for (i in yearspan) {
   
   
   
-  jpeg(paste("/agmesh-scenarios/", scen, "/rminimages", "/springplot", "rmin",  i, ".jpg", sep=""))
+  jpeg(paste("/agmesh-scenarios/", scen, "/springplot", "rmin",  i, ".jpg", sep=""))
   
   lyt = c(1, 2)
   
@@ -670,7 +671,7 @@ for (i in yearspan) {
   
   dev.off()
   
-  jpeg(paste("/agmesh-scenarios/", scen, "/rmaximages", "/springplot", "rmax", i, ".jpg", sep=""))
+  jpeg(paste("/agmesh-scenarios/", scen, "/springplot", "rmax", i, ".jpg", sep=""))
   
   lyt = c(1, 2)
   
@@ -713,7 +714,7 @@ for (i in yearspan) {
   
   dev.off()
   
-  jpeg(paste("/agmesh-scenarios/", scen, "/sradimages", "/springplot", "srad", i, ".jpg", sep=""))
+  jpeg(paste("/agmesh-scenarios/", scen, "/springplot", "srad", i, ".jpg", sep=""))
   
   lyt = c(1, 2)
   
@@ -757,7 +758,7 @@ for (i in yearspan) {
   
   dev.off()
   
-  jpeg(paste("/agmesh-scenarios/", scen, "/vsimages", "/springplot", "vs", i, ".jpg", sep=""))
+  jpeg(paste("/agmesh-scenarios/", scen, "/springplot", "vs", i, ".jpg", sep=""))
   
   lyt = c(1, 2)
   
@@ -809,7 +810,7 @@ for (i in yearspan) {
 
 for (i in yearspan) {
   
-  jpeg(paste("/agmesh-scenarios/", scen, "/tmmximages", "/winterplot", "tmmx", i, ".jpg", sep=""))
+  jpeg(paste("/agmesh-scenarios/", scen, "/winterplot", "tmmx", i, ".jpg", sep=""))
   
   lyt = c(1, 2)
   
@@ -888,7 +889,7 @@ for (i in yearspan) {
   
   
   
-  jpeg(paste("/agmesh-scenarios/", scen, "/tmmnimages", "/winterplot", "tmmn", i, ".jpg", sep=""))
+  jpeg(paste("/agmesh-scenarios/", scen, "/winterplot", "tmmn", i, ".jpg", sep=""))
   
   lyt = c(1, 2)
   
@@ -934,7 +935,7 @@ for (i in yearspan) {
   
   
   
-  jpeg(paste("/agmesh-scenarios/", scen, "/rminimages", "/winterplot", "rmin",  i, ".jpg", sep=""))
+  jpeg(paste("/agmesh-scenarios/", scen, "/winterplot", "rmin",  i, ".jpg", sep=""))
   
   lyt = c(1, 2)
   
@@ -978,7 +979,7 @@ for (i in yearspan) {
   
   dev.off()
   
-  jpeg(paste("/agmesh-scenarios/", scen, "/rmaximages", "/winterplot", "rmax", i, ".jpg", sep=""))
+  jpeg(paste("/agmesh-scenarios/", scen, "/winterplot", "rmax", i, ".jpg", sep=""))
   
   lyt = c(1, 2)
   
@@ -1021,7 +1022,7 @@ for (i in yearspan) {
   
   dev.off()
   
-  jpeg(paste("/agmesh-scenarios/", scen, "/sradimages", "/winterplot", "srad", i, ".jpg", sep=""))
+  jpeg(paste("/agmesh-scenarios/", scen, "/winterplot", "srad", i, ".jpg", sep=""))
   
   lyt = c(1, 2)
   
@@ -1065,7 +1066,7 @@ for (i in yearspan) {
   
   dev.off()
   
-  jpeg(paste("/agmesh-scenarios/", scen, "/vsimages", "/winterplot", "vs", i, ".jpg", sep=""))
+  jpeg(paste("/agmesh-scenarios/", scen, "/winterplot", "vs", i, ".jpg", sep=""))
   
   lyt = c(1, 2)
   
